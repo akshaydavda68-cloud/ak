@@ -1,7 +1,6 @@
 import { useState } from "react";
 import BuyNow from "./components/BuyNow";
 import ClosingSections, { LegalModal, SiteFooter } from "./components/Closing";
-import GuaranteeSection from "./components/Guarantee";
 import HeroSection from "./components/Hero";
 import MethodSections from "./components/Method";
 import OfferSections from "./components/Offer";
@@ -19,7 +18,6 @@ export default function App() {
       <main>
         <StorySections />
         <MethodSections />
-        <GuaranteeSection />
         <OfferSections />
         <Reviews />
         <BuyNow />

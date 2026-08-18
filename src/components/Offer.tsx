@@ -84,6 +84,13 @@ function ModulesSection() {
 
 /* ---------------- bonuses ---------------- */
 
+const BONUS_COVERS: string[] = [
+  IMAGES.journal,   // Busy-Day Reset Cards™
+  IMAGES.recipes,   // 15-Minute Meals Pack™
+  IMAGES.hero,      // Eat Out, Stay Grounded™
+  IMAGES.bundle,    // Quick-Start Checklist™
+];
+
 function BonusesSection() {
   return (
     <section className="relative bg-pine-900 py-24 sm:py-32 overflow-hidden">
@@ -118,24 +125,104 @@ function BonusesSection() {
           {BONUSES.map((b, i) => (
             <Reveal key={b.name} delay={i * 110}>
               <div
-                className={`group relative h-full rounded-2xl border-2 border-dashed border-butter-500/40 bg-pine-800/60 p-6 transition-all duration-500 hover:-translate-y-2 hover:bg-pine-800 hover:border-solid hover:border-butter-500/70 ${
+                className={`group relative h-full rounded-2xl border-2 border-dashed border-butter-500/40 bg-pine-800/60 p-4 pb-6 transition-all duration-500 hover:-translate-y-2 hover:bg-pine-800 hover:border-solid hover:border-butter-500/70 ${
                   i % 2 ? "rotate-[0.8deg]" : "rotate-[-0.8deg]"
                 } hover:rotate-0`}
               >
-                <span className="absolute -top-3 left-5 bg-butter-500 text-pine-950 text-[10px] font-black uppercase tracking-[0.16em] rounded-full px-3 py-1">
+                <span className="absolute -top-3 left-5 z-10 bg-butter-500 text-pine-950 text-[10px] font-black uppercase tracking-[0.16em] rounded-full px-3 py-1">
                   {b.tag}
                 </span>
-                <span className="grid place-items-center w-12 h-12 rounded-xl bg-paper/10 text-butter-300 transition-colors duration-300 group-hover:bg-butter-500 group-hover:text-pine-950">
-                  <Icon name={b.icon as IconName} className="w-6 h-6" />
-                </span>
-                <h3 className="mt-4 font-display font-bold text-xl text-paper leading-snug">{b.name}</h3>
-                <p className="mt-2.5 text-sm text-paper/75 leading-relaxed">{b.text}</p>
-                <p className="mt-4 pt-4 border-t border-dashed border-paper/15 text-xs text-butter-300 font-semibold">
-                  {b.detail}
-                </p>
+
+                {/* cover photo */}
+                <div className="relative overflow-hidden rounded-xl aspect-[4/3] bg-pine-950/50">
+                  <img
+                    src={BONUS_COVERS[i]}
+                    alt={`${b.name} — preview`}
+                    className="w-full h-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-[1.08]"
+                    loading="lazy"
+                  />
+                  <span className="absolute inset-0 bg-gradient-to-t from-pine-950/50 via-transparent to-transparent" aria-hidden="true" />
+                  <span className="absolute bottom-2 left-2 grid place-items-center w-9 h-9 rounded-lg bg-paper/95 text-pine-800 shadow-card">
+                    <Icon name={b.icon as IconName} className="w-5 h-5" />
+                  </span>
+                </div>
+
+                <div className="px-2">
+                  <h3 className="mt-4 font-display font-bold text-xl text-paper leading-snug">{b.name}</h3>
+                  <p className="mt-2.5 text-sm text-paper/75 leading-relaxed">{b.text}</p>
+                  <p className="mt-4 pt-4 border-t border-dashed border-paper/15 text-xs text-butter-300 font-semibold">
+                    {b.detail}
+                  </p>
+                </div>
               </div>
             </Reveal>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- guarantee (classic seal band) ---------------- */
+
+function GuaranteeSeal() {
+  return (
+    <div className="relative w-56 h-56 sm:w-64 sm:h-64 mx-auto">
+      <svg viewBox="0 0 200 200" className="w-full h-full drop-shadow-xl" role="img" aria-label="60-day money-back guarantee seal">
+        <defs>
+          <path id="sealRing" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0" fill="none" />
+        </defs>
+        <circle cx="100" cy="100" r="97" fill="#ffc24b" />
+        <circle cx="100" cy="100" r="88" fill="#0d2e23" />
+        <circle cx="100" cy="100" r="56" fill="none" stroke="#ffc24b" strokeWidth="1.5" strokeDasharray="4 5" />
+        <g className="seal-spin">
+          <text fontSize="12.5" fontWeight="700" letterSpacing="2.6" fill="#ffc24b" fontFamily="Instrument Sans, sans-serif">
+            <textPath href="#sealRing">60-DAY MONEY-BACK GUARANTEE • TRY IT RISK-FREE •</textPath>
+          </text>
+        </g>
+        <text x="100" y="106" textAnchor="middle" fontSize="46" fontWeight="900" fill="#fffefa" fontFamily="Fraunces, serif">
+          60
+        </text>
+        <text x="100" y="128" textAnchor="middle" fontSize="13" fontWeight="700" letterSpacing="4" fill="#ffc24b" fontFamily="Instrument Sans, sans-serif">
+          DAYS
+        </text>
+      </svg>
+    </div>
+  );
+}
+
+function GuaranteeBand() {
+  return (
+    <section id="guarantee" className="relative bg-pine-950 py-24 sm:py-28 overflow-hidden scroll-mt-16">
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div className="absolute -top-24 left-1/4 w-80 h-80 rounded-full bg-pine-800/60 blur-3xl" />
+        <div className="absolute -bottom-32 right-1/5 w-96 h-96 rounded-full bg-pine-900 blur-3xl" />
+      </div>
+      <div className="relative mx-auto max-w-6xl px-5 sm:px-8 grid lg:grid-cols-[auto,1fr] gap-12 lg:gap-20 items-center">
+        <Reveal dir="scale">
+          <GuaranteeSeal />
+        </Reveal>
+        <div>
+          <Reveal>
+            <Kicker tone="light">60-Day Money-Back Guarantee</Kicker>
+          </Reveal>
+          <Reveal delay={100}>
+            <h2 className="mt-5 font-display font-black text-4xl sm:text-5xl leading-[1.05] tracking-tight text-paper">
+              Try The Craving Code™ <span className="squiggle-butter">with confidence.</span>
+            </h2>
+          </Reveal>
+          <Reveal delay={200}>
+            <p className="mt-6 text-lg text-paper/80 leading-relaxed max-w-2xl">
+              Your purchase is covered by our <strong className="text-butter-300 font-bold">60-day money-back guarantee</strong>.
+              If you decide the program isn't right for you, simply follow the refund instructions provided with your
+              purchase within 60 days.
+            </p>
+          </Reveal>
+          <Reveal delay={300}>
+            <p className="mt-5 font-display italic text-2xl text-butter-300">
+              No need to continue with something that isn't a good fit.
+            </p>
+          </Reveal>
         </div>
       </div>
     </section>
@@ -248,6 +335,7 @@ export default function OfferSections() {
     <>
       <ModulesSection />
       <BonusesSection />
+      <GuaranteeBand />
       <PriceSection />
     </>
   );
